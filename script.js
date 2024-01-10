@@ -61,19 +61,41 @@ function selectProject(projectId) {
     projectCodeExamples.textContent = project.codeExample;
 }
 
+// Function to score and filter projects based on search term
+function scoreAndFilterProjects(searchTerm) {
+    const words = searchTerm.toLowerCase().split(/\s+/); // Split search term into words
+    const scoredProjects = projects.map(project => {
+        let score = 0;
+
+        // Check each word in the search query
+        words.forEach(word => {
+            if (project.name.toLowerCase().includes(word)) {
+                score += 5;
+            }
+            if (project.description.toLowerCase().includes(word)) {
+                score += 2;
+            }
+            if (project.tags && project.tags.some(tag => tag.toLowerCase().includes(word))) {
+                score += 10;
+            }
+        });
+
+        return { project, score };
+    });
+
+    // Sort projects by score in descending order
+    return scoredProjects.filter(p => p.score > 0).sort((a, b) => b.score - a.score).map(p => p.project);
+}
+
 // Event listener for the search button and initial project loading
 document.addEventListener('DOMContentLoaded', () => {
     const searchButton = document.getElementById('search-btn');
     const searchInput = document.getElementById('search-input');
 
     searchButton.addEventListener('click', () => {
-        const searchTerm = searchInput.value.toLowerCase();
-        const filteredProjects = projects.filter(project => 
-            project.name.toLowerCase().includes(searchTerm) ||
-            project.description.toLowerCase().includes(searchTerm) ||
-            project.tags.some(tag => tag.toLowerCase().includes(searchTerm))
-        );
-        populateProjects(filteredProjects);
+        const searchTerm = searchInput.value;
+        const filteredAndScoredProjects = scoreAndFilterProjects(searchTerm);
+        populateProjects(filteredAndScoredProjects);
     });
 
     // Fetch and populate projects
