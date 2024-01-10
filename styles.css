@@ -75,7 +75,8 @@ nav ul li a:hover {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    justify-content: space-around;
+    justify-content: flex-start;
+    width: 40%;
 }
 
 .project-entry {
@@ -126,6 +127,9 @@ nav ul li a:hover {
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 60%; 
+    flex-grow: 1; 
+    flex-shrink: 1;
 }
 
 #project-description, #project-code-examples {
@@ -138,4 +142,5 @@ nav ul li a:hover {
         width: 100%;
     }
 }
+
 
