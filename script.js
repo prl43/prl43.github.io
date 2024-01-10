@@ -1,129 +1,104 @@
-body, html {
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto', sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-}
+const projects = []; // Will be populated dynamically
 
-header {
-    background: #4a69bd;
-    color: #fff;
-    padding: 0.5em 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
+// Base URL for project JSON files (relative path)
+const projectsDirectoryUrl = './projects/'; // Adjust based on your directory structure
 
-nav ul {
-    list-style: none;
-    text-align: center;
-    padding: 0;
-}
+// Function to fetch project files
+async function fetchProjectFiles() {
+    try {
+        // List of project file names
+        const projectFileNames = ['project1.json', 'project2.json']; // Replace with actual file names
 
-nav ul li {
-    display: inline;
-    margin: 0 10px;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: #fff;
-    transition: color 0.3s;
-}
-
-nav ul li a:hover {
-    color: #f8c291;
-}
-
-#content {
-    padding: 20px;
-    max-width: 1200px;
-    margin: auto;
-}
-
-#projects-container {
-    display: flex;
-    justify-content: space-between;
-}
-
-#projects-list, #selected-project {
-    width: 45%;
-    max-height: 600px;
-    overflow-y: auto;
-}
-
-#search-bar {
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-#search-input {
-    padding: 10px;
-    width: calc(100% - 20px);
-    margin-right: 10px;
-    border-radius: 20px;
-    border: 1px solid #ccc;
-}
-
-.project-entry {
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
-    padding: 15px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    width: calc(100% - 20px);
-    cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.project-entry:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-.project-image {
-    width: 80px;
-    height: 80px;
-    float: left;
-    margin-right: 15px;
-    border-radius: 50%;
-}
-
-.project-details {
-    overflow: hidden;
-}
-
-.project-title {
-    font-size: 1.4em;
-    color: #333;
-    margin-bottom: 5px;
-}
-
-.project-description {
-    font-size: 1em;
-    color: #666;
-}
-
-#selected-project {
-    margin-top: 20px;
-    padding: 15px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-#project-description, #project-code-examples {
-    margin-bottom: 20px;
-}
-
-@media (max-width: 768px) {
-    #projects-container {
-        flex-direction: column;
-    }
-
-    #projects-list, #selected-project {
-        width: 100%;
+        for (const fileName of projectFileNames) {
+            await fetchProjectData(`${projectsDirectoryUrl}${fileName}`);
+        }
+        populateProjects(projects);
+    } catch (error) {
+        console.error('Error fetching project files:', error);
     }
 }
+
+// Fetch individual project data
+async function fetchProjectData(projectUrl) {
+    try {
+        const response = await fetch(projectUrl);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const projectData = await response.json();
+        projects.push(projectData);
+    } catch (error) {
+        console.error('Error fetching project data:', error);
+    }
+}
+
+// Function to populate projects list
+function populateProjects(projectsList) {
+    const projectsListContainer = document.getElementById('projects-list');
+    projectsListContainer.innerHTML = ''; // Clear existing list
+
+    projectsList.forEach(project => {
+        const projectEntry = document.createElement('div');
+        projectEntry.classList.add('project-entry');
+        projectEntry.innerHTML = `
+            <img class="project-image" src="${project.image}" alt="${project.name}">
+            <div class="project-details">
+                <div class="project-title">${project.name}</div>
+                <div class="project-description">${project.description.substring(0, 50)}...</div>
+            </div>
+        `;
+        projectEntry.addEventListener('click', () => selectProject(project.id));
+        projectsListContainer.appendChild(projectEntry);
+    });
+}
+
+// Function to handle project selection
+function selectProject(projectId) {
+    const project = projects.find(p => p.id === projectId);
+    const projectDescription = document.getElementById('project-description');
+    const projectCodeExamples = document.getElementById('project-code-examples');
+    projectDescription.textContent = project.description;
+    projectCodeExamples.textContent = project.codeExample;
+}
+
+// Function to score and filter projects based on search term
+function scoreAndFilterProjects(searchTerm) {
+    const words = searchTerm.toLowerCase().split(/\s+/); // Split search term into words
+    const scoredProjects = projects.map(project => {
+        let score = 0;
+
+        // Check each word in the search query
+        words.forEach(word => {
+            if (project.name.toLowerCase().includes(word)) {
+                score += 5;
+            }
+            if (project.description.toLowerCase().includes(word)) {
+                score += 2;
+            }
+            if (project.tags && project.tags.some(tag => tag.toLowerCase().includes(word))) {
+                score += 10;
+            }
+        });
+
+        return { project, score };
+    });
+
+    // Sort projects by score in descending order
+    return scoredProjects.filter(p => p.score > 0).sort((a, b) => b.score - a.score).map(p => p.project);
+}
+
+// Event listener for the search button and initial project loading
+document.addEventListener('DOMContentLoaded', () => {
+    const searchButton = document.getElementById('search-btn');
+    const searchInput = document.getElementById('search-input');
+
+    searchButton.addEventListener('click', () => {
+        const searchTerm = searchInput.value;
+        const filteredAndScoredProjects = scoreAndFilterProjects(searchTerm);
+        populateProjects(filteredAndScoredProjects);
+    });
+
+    // Fetch and populate projects
+    fetchProjectFiles();
+});
 

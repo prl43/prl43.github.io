@@ -6,31 +6,35 @@
     <title>Projects - My Portfolio</title>
     <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
+    <link rel="icon" type="image/png" href="robot-icon.png"> <!-- Placeholder for a cutesy robot favicon -->
 </head>
 <body>
     <header>
+        <!-- Navigation Links with Icons -->
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About Me</a></li>
-                <li><a href="projects.html">Projects</a></li>
+                <li><a href="index.html"><img src="home-icon.png" alt="Home"> Home</a></li> <!-- Placeholder for home icon -->
+                <li><a href="projects.html"><img src="projects-icon.png" alt="Projects"> Projects</a></li> <!-- Placeholder for projects icon -->
+                <li><a href="about.html"><img src="about-icon.png" alt="About Me"> About Me</a></li> <!-- Placeholder for about icon -->
             </ul>
         </nav>
     </header>
     <main>
         <div id="content">
-            <div id="projects-container">
-                <div id="search-bar">
-                    <input type="text" id="search-input" placeholder="Search for project">
-                </div>
-                <div id="projects-list">
-                    <!-- Dynamically populated list of projects -->
-                </div>
-                <div id="selected-project">
-                    <div id="project-description"></div>
-                    <div id="project-code-examples"></div>
-                </div>
+            <!-- Search Bar -->
+            <div id="search-bar">
+                <input type="text" id="search-input" placeholder="Search for project">
+                <button id="search-btn"><img src="search-icon.png" alt="Search"></button> <!-- Placeholder for search icon -->
             </div>
+            <!-- Projects List -->
+            <section id="projects-list">
+                <!-- Dynamically populated list of projects -->
+            </section>
+            <!-- Selected Project Display -->
+            <section id="selected-project">
+                <div id="project-description"></div>
+                <div id="project-code-examples"></div>
+            </section>
         </div>
     </main>
 </body>
