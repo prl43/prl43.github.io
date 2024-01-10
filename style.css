@@ -1,70 +1,119 @@
-body {
-
-    font-family: Arial, sans-serif;
-
-    line-height: 1.6;
-
+/* General Styles */
+body, html {
     margin: 0;
-
     padding: 0;
-
-    background: #f4f4f4;
-
+    font-family: 'Roboto', sans-serif;
 }
 
-header, nav, main, footer {
-
-    padding: 1.2em;
-
-}
-
+/* Header and Navigation Styles */
 header {
-
     background: #333;
-
     color: #fff;
-
-    text-align: center;
-
+    padding: 1em 0;
 }
 
 nav ul {
-
     list-style: none;
-
-    padding: 0;
-
+    text-align: center;
 }
 
 nav ul li {
-
     display: inline;
-
-    margin-right: 10px;
-
+    margin-right: 20px;
 }
 
 nav ul li a {
-
     text-decoration: none;
-
-    color: #333;
-
-}
-
-section {
-
-    margin-bottom: 20px;
-
-}
-
-footer {
-
-    text-align: center;
-
-    background: #333;
-
     color: #fff;
-
 }
+
+/* Main Content Styles */
+#content {
+    padding: 20px;
+}
+
+/* Search Bar Styles */
+#search-bar {
+    margin-bottom: 20px;
+}
+
+#search-input {
+    padding: 10px;
+    width: calc(100% - 120px);
+    margin-right: 10px;
+}
+
+#search-btn {
+    padding: 10px 20px;
+    background-color: #f0a500;
+    border: none;
+    cursor: pointer;
+}
+
+/* Projects List Styles */
+#projects-list {
+    float: left;
+    width: 50%;
+    height: 400px; /* Example fixed height for scrolling */
+    overflow-y: auto;
+    padding-right: 10px;
+    box-sizing: border-box;
+}
+
+.project-entry {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+.project-entry:hover {
+    background-color: #f0f0f0;
+}
+
+.project-image {
+    width: 50px; /* Fixed size or responsive */
+    height: 50px;
+    float: left;
+    margin-right: 10px;
+}
+
+.project-details {
+    overflow: hidden;
+}
+
+.project-title {
+    font-size: 1.2em;
+    color: #333;
+}
+
+.project-description {
+    font-size: 0.9em;
+    color: #666;
+}
+
+/* Selected Project Styles */
+#selected-project {
+    float: right;
+    width: 45%;
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+
+#project-description, #project-code-examples {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+/* Responsive Design for smaller devices */
+@media (max-width: 768px) {
+    #projects-list, #selected-project {
+        float: none;
+        width: 100%;
+    }
+}
+
+/* Additional steampunk-inspired styles will be added here */
 

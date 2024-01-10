@@ -1,0 +1,9 @@
+{
+    "id": 1,
+    "name": "Project Name",
+    "description": "Project description...",
+    "tags": ["Tag1", "Tag2"],
+    "codeExample": "Code snippet...",
+    "image": "path_to_image.jpg"
+}
+
