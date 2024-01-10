@@ -54,7 +54,7 @@ nav ul li a {
 #projects-list {
     float: left;
     width: 50%;
-    height: 400px; /* Example fixed height for scrolling */
+    height: 400px;
     overflow-y: auto;
     padding-right: 10px;
     box-sizing: border-box;
@@ -72,7 +72,7 @@ nav ul li a {
 }
 
 .project-image {
-    width: 50px; /* Fixed size or responsive */
+    width: 50px;
     height: 50px;
     float: left;
     margin-right: 10px;
@@ -114,6 +114,4 @@ nav ul li a {
         width: 100%;
     }
 }
-
-/* Additional steampunk-inspired styles will be added here */
 

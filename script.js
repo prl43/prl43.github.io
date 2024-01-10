@@ -1,19 +1,18 @@
 const projects = []; // Will be populated dynamically
 
-// Base URL for GitHub API to access files in your repository
-const githubRepoApiUrl = 'https://api.github.com/repos/prl43/prl43.github.io/contents/projects'; // Update 'projects' if different folder
+// Base URL for project JSON files (relative path)
+const projectsDirectoryUrl = './projects/'; // Adjust based on your directory structure
 
-// Fetch project files from GitHub
+// Function to fetch project files
 async function fetchProjectFiles() {
     try {
-        const response = await fetch(githubRepoApiUrl);
-        const files = await response.json();
-        const projectFiles = files.filter(file => file.name.endsWith('.json'));
+        // List of project file names
+        const projectFileNames = ['project1.json', 'project2.json']; // Replace with actual file names
 
-        for (const file of projectFiles) {
-            await fetchProjectData(file.download_url);
+        for (const fileName of projectFileNames) {
+            await fetchProjectData(`${projectsDirectoryUrl}${fileName}`);
         }
-        populateProjects(projects); // Populate projects after fetching
+        populateProjects(projects);
     } catch (error) {
         console.error('Error fetching project files:', error);
     }
@@ -23,6 +22,9 @@ async function fetchProjectFiles() {
 async function fetchProjectData(projectUrl) {
     try {
         const response = await fetch(projectUrl);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
         const projectData = await response.json();
         projects.push(projectData);
     } catch (error) {
@@ -74,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
         populateProjects(filteredProjects);
     });
 
-    // Fetch and populate projects from GitHub
+    // Fetch and populate projects
     fetchProjectFiles();
 });
 
