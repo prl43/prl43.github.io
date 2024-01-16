@@ -1,9 +1,9 @@
 {
     "id": 1,
-    "name": "Project Name",
-    "description": "Project description...",
-    "tags": ["Tag1", "Tag2"],
-    "codeExample": "Code snippet...",
-    "image": "path_to_image.jpg"
+    "name": "Crack Image Classification IBM",
+    "description": "Built an image classifier to find cracks in concrete to prove my ability with a 99.83% accuracy on the test set. Learned Torch with Pillow, pandas, numpy, and torchvision. Learned how to train the models, what methods to use per node, as well as concepts like convolution layers and pooling layers for image classification.",
+    "tags": ["python", "jupiter", "Keras", "pytorch","Torch", "Pillow", "pandas", "numpy", "torchvision"],
+    "codeExample": "https://github.com/prl43/Crack-Identifier-AI.git",
+    "image": "../images/ibmCapstoneImage.png"
 }
 

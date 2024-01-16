@@ -1,0 +1,9 @@
+{
+    "id": 3,
+    "name": "Operating System Simulator NAU",
+    "description": "Being one of the hardest courses at NAU at over 10k lines of code over 14 files, I built a simulator consisting of running timers for tasks consisting of both preemptive and non-preemptive scheduling algorithms in C. Learned about deadlock, safe states, metadata, PCBs, but overall learned how to plan ahead.",
+    "tags": ["C", "C++", "pthread", "parallel", "OS"],
+    "codeExample": "https://github.com/prl43/Operating-System-Simulator/",
+    "image": "../images/simulatorProgram.png"
+}
+

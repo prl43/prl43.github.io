@@ -1,7 +1,6 @@
 /* General Styles */
 body, html {
     margin: 0;
-    padding: 0;
     font-family: 'Roboto', sans-serif;
     background-color: #f4f4f4;
     color: #333;
@@ -17,7 +16,7 @@ header {
 
 nav ul {
     list-style: none;
-    text-align: center;
+    text-align: center; /* Center the navigation links */
     padding: 0;
 }
 
@@ -38,15 +37,19 @@ nav ul li a:hover {
 
 /* Main Content Styles */
 #content {
+    display: flex;
+    flex-direction: column;
     padding: 20px;
     max-width: 1200px;
-    margin: auto;
+    margin: auto; /* Center the content */
 }
 
 /* Search Bar Styles */
 #search-bar {
     margin-bottom: 20px;
     text-align: center;
+    display: block;
+    width: 100%;
 }
 
 #search-input {
@@ -70,25 +73,40 @@ nav ul li a:hover {
     background-color: #38ada9;
 }
 
-/* Projects List Styles */
-#projects-list {
+/* Projects Section Styles */
+#projects {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: flex-start;
-    width: 40%;
+    padding: 20px;
+    width: 100%;
+    flex-direction: row;
+    box-sizing: border-box;
+}
+
+#list-container {
+    flex: 0 1 40%;
+    padding-right: 10px;
+    box-sizing: border-box;
+    overflow-y: scroll;
+}
+
+#selected-container {
+    flex: 0 1 60%;
+    padding-left: 10px;
+    box-sizing: border-box;
+    overflow-y: scroll;
 }
 
 .project-entry {
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
+    margin-top: 20px;
     padding: 15px;
+    border: 1px solid #ccc;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    width: calc(50% - 10px);
-    cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
+    width: 100%; 
+    flex-grow: 1; 
+    flex-shrink: 1;
+    box-sizing: border-box;
 }
 
 .project-entry:hover {
@@ -119,7 +137,6 @@ nav ul li a:hover {
     color: #666;
 }
 
-/* Selected Project Styles */
 #selected-project {
     margin-top: 20px;
     padding: 15px;
@@ -130,6 +147,7 @@ nav ul li a:hover {
     width: 60%; 
     flex-grow: 1; 
     flex-shrink: 1;
+    box-sizing: border-box;
 }
 
 #project-description, #project-code-examples {
@@ -138,9 +156,26 @@ nav ul li a:hover {
 
 /* Responsive Design for smaller devices */
 @media (max-width: 768px) {
+    nav ul {
+        display: block;
+    }
+
+    nav ul li {
+        display: block;
+        text-align: center;
+    }
+
+    #projects {
+        flex-direction: column;
+    }
+
+    #list-container, #selected-container {
+        width: 100%;
+        height: auto;
+    }
+
     #projects-list .project-entry {
         width: 100%;
     }
 }
-
 

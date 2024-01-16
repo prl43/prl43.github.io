@@ -1,13 +1,14 @@
 const projects = []; // Will be populated dynamically
 
 // Base URL for project JSON files (relative path)
-const projectsDirectoryUrl = './projects/'; // Adjust based on your directory structure
+// Adjust based on your directory structure in GitHub Pages
+const projectsDirectoryUrl = './projects/'; 
 
 // Function to fetch project files
 async function fetchProjectFiles() {
     try {
         // List of project file names
-        const projectFileNames = ['project1.json', 'project2.json']; // Replace with actual file names
+        const projectFileNames = ['project1.json', 'project2.json', 'project3.json']; // Replace with actual file names
 
         for (const fileName of projectFileNames) {
             await fetchProjectData(`${projectsDirectoryUrl}${fileName}`);
@@ -58,7 +59,9 @@ function selectProject(projectId) {
     const projectDescription = document.getElementById('project-description');
     const projectCodeExamples = document.getElementById('project-code-examples');
     projectDescription.textContent = project.description;
-    projectCodeExamples.textContent = project.codeExample;
+
+    // Link to the GitHub file within the same directory
+    projectCodeExamples.innerHTML = `<a href="${projectsDirectoryUrl}${project.codeExample}" target="_blank">View Code Example</a>`;
 }
 
 // Function to score and filter projects based on search term

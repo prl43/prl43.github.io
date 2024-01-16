@@ -1,9 +1,9 @@
 {
     "id": 2,
-    "name": "Project appple",
-    "description": "Project description...",
-    "tags": ["Tag1", "Tag2"],
-    "codeExample": "Code snippet...",
-    "image": "path_to_image.jpg"
+    "name": "Image Classification Projects IBM",
+    "description": "While getting my capstone in AI from IBM, I did many projects in different modules. These are the projects I did in Image Processing. This included spacial filtering, Convolutional Neural Networks, Data Augmentation, Digit Classification, Logistic Regression With Mini-Batch Gradient Descent, and Neural Network Rectified Linear Unit (ReLU) vs Sigmoid.ipynb.",
+    "tags": ["python", "jupiter", "Keras", "pytorch","Torch", "Pillow", "pandas", "numpy", "torchvision"],
+    "codeExample": "https://github.com/prl43/Image-Processing.git",
+    "image": "../images/imageProcessing.png"
 }
 
