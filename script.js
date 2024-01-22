@@ -61,7 +61,7 @@ function selectProject(projectId) {
     projectDescription.textContent = project.description;
 
     // Link to the GitHub file within the same directory
-    projectCodeExamples.innerHTML = `<a href="${projectsDirectoryUrl}${project.codeExample}" target="_blank">View Code Example</a>`;
+    projectCodeExamples.innerHTML = `<a href="${project.codeExample}" target="_blank">View Code Example | Request Access Via Email @ prl@loveathome.us</a>`;
 }
 
 // Function to score and filter projects based on search term
